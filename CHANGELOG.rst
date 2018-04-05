@@ -6,6 +6,7 @@ Features
 * Add one() function to the ResultSet API (PYTHON-947)
 * Create an utility function to fetch concurrently many keys from the same replica (PYTHON-647)
 * Allow filter queries with fields that have an index managed outside of cqlengine (PYTHON-966)
+* Asyncore reactors should use a global variable instead of a class variable for the event loop (PYTHON-697)
 
 Other
 -----
