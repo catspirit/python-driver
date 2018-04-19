@@ -77,9 +77,7 @@ class CustomProtocolHandlerTest(unittest.TestCase):
 
         # use our custom protocol handlder
 
-        # TODO temporary
-        from cassandra.protocol import _message_encoders, _message_decoders
-        session.client_protocol_handler = CustomTestRawRowType(_message_encoders, _message_decoders)
+        session.client_protocol_handler = CustomTestRawRowType
         result = session.execute("SELECT schema_version FROM system.local").one()
         raw_value = result[0]
         self.assertTrue(isinstance(raw_value, binary_type))
@@ -110,9 +108,7 @@ class CustomProtocolHandlerTest(unittest.TestCase):
         cluster = Cluster(protocol_version=PROTOCOL_VERSION,
             execution_profiles={EXEC_PROFILE_DEFAULT: ExecutionProfile(row_factory=tuple_factory)})
         session = cluster.connect(keyspace="custserdes")
-        # TODO temporary
-        from cassandra.protocol import _message_encoders, _message_decoders
-        session.client_protocol_handler = CustomProtocolHandlerResultMessageTracked(_message_encoders, _message_decoders)
+        session.client_protocol_handler = CustomProtocolHandlerResultMessageTracked
 
         colnames = create_table_with_all_types("alltypes", session, 1)
         columns_string = ", ".join(colnames)
